@@ -66,6 +66,7 @@ const thoughtController = {
 
     async createReaction(req, res) {
         try {
+            
             const thoughtData = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
                 { $push: { reactions: req.body } },
@@ -75,11 +76,13 @@ const thoughtController = {
                 ? res.status(404).json({ message: 'No thought found with that ID!' })
                 : res.json(thoughtData);
         } catch (error) {
+            
             res.json(500).json(error);
         }
     },
 
     async deleteReaction(req, res) {
+        
         try {
             const thoughtData = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
